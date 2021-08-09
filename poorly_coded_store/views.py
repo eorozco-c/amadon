@@ -11,7 +11,7 @@ def checkout(request):
     if request.method == "POST":
         quantity_from_form = int(request.POST["quantity"])
         try:
-            product = Product.objects.get(id=request.POST["price"])
+            product = Product.objects.get(id=request.POST["product.id"])
             price_from_form = float(product.price)
         except:
             return redirect("/")
