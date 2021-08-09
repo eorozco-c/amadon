@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- UIkit CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uikit@3.7.2/dist/css/uikit.min.css"
+    />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.2/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.2/dist/js/uikit-icons.min.js"></script>
+    <title>Amadon</title>
+  </head>
+  <body>
+    <div class="uk-container">
+      <h1>Amadon Store!</h1>
+      <table class="uk-table uk-table-justify">
+        <thead>
+          <tr>
+            <th class="uk-margin">Item</th>
+            <th class="uk-margin">Price</th>
+            <th class="uk-margin">Quantity</th>
+            <th class="uk-margin">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in all_products %}
+          <tr>
+            <form action="/checkout" method="post">
+              {% csrf_token %}
+              <td>{{product.description}}</td>
+              <td>
+                <input
+                  type="hidden"
+                  name="price"
+                  value="{{product.id}}"
+                />{{product.price}}
+              </td>
+              <td>
+                <select class="uk-select" name="quantity">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </td>
+              <td>
+                <input
+                  class="uk-button uk-button-primary"
+                  type="submit"
+                  value="Buy!"
+                />
+              </td>
+            </form>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
